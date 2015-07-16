@@ -6,6 +6,7 @@
 
 	var svg,
 		data,
+		x,y,
 		height = 500,
 		width = 400;
 
@@ -21,11 +22,13 @@
 
 
 	//Render the bar chart
-	bars.barChart = function(){
+	bars.barChart = function(selctor){
 
-		bars.initialize("body");
+		//initialze the svg element in the desired tag
+		//must preceed this code in the html
+		bars.initialize(selector);
 
-		//bar chart code goes here
+		//let render the bars!
 		svg.selectAll("rect")
 			.data(data)
 			.enter()
@@ -44,6 +47,52 @@
 		//line chart code goes here
 	}
 
+	//X Scale
+	bars.x = function(scale){
+		if(!arguments){
+			return x;
+		} else{
+			x = scale;
+		}
+
+		return bars;
+	}
+
+	//Y Scale Accessor
+	bars.y = function(scale){
+		if(!arguments){
+			return y;
+		} else {
+			y = scale;
+		}
+
+		return bars;
+	}
+
+
+	//Height Accessor
+	bars.height = function(newHeight){
+		if(!arguments){
+			return height;
+		} else {
+			height = newHeight;
+		}
+
+		return bars;
+	}
+
+	//Width Accessor
+	bars.width = function(newWidth){
+		if(!arguments){
+			return width;
+		} else {
+			width = newWidth;
+		}
+
+		return bars;
+	}
+
+	//Set the data
 	bars.setData = function(dataset){
 		if (!arguments){
 			return data;
@@ -53,6 +102,7 @@
 
 		return bars;
 	}
+
   	//make objects callable
     if (typeof define === "function" && define.amd) define(bars); else if (typeof module === "object" && module.exports) module.exports = bars;
   this.bars = bars;
