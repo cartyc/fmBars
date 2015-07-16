@@ -17,11 +17,22 @@
 		var makeAChart = bars;
 
 
-		//set the data
-		makeAChart.setData([1,4,3,2,5]);
+		//Make a Random dataset
+		data = function(){
+			var d = [];
 
-		//render a chart
-		makeAChart.barChart();
+			for ( var i = 0; i < 20 ; i++){
+				d.push(Math.floor(Math.random() * 50) + 1); 
+			}
+
+			return d;
+		}
+
+		//set the data to the chart
+		makeAChart.setData(data);
+
+		//render it!
+		makeAChart.barChart("body");
 
 
 	</script>

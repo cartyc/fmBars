@@ -4,6 +4,7 @@
     	author: "Chris Carty"
 	};
 
+	//set global vars and defaults if any
 	var svg,
 		data,
 		x,y,
@@ -22,7 +23,7 @@
 
 
 	//Render the bar chart
-	bars.barChart = function(selctor){
+	bars.barChart = function(selector){
 
 		//initialze the svg element in the desired tag
 		//must preceed this code in the html
