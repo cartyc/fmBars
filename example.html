@@ -13,11 +13,6 @@
 
 	<script type="text/javascript">
 
-		// create new instance
-		var makeAChart = bars,
-			dataset;
-
-
 		//Make a Random dataset
 		var data = function(){
 			var d = [];
@@ -29,13 +24,15 @@
 			return d;
 		}
 
+		// create new instance and the rest of the parameters
+		var makeAChart = bars,
+			dataset,
+			w = 1000,
+			h = 600,
+			dataset = data(),
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([0,w], 0.05),
+			y = d3.scale.linear().domain([0,d3.max(dataset)]).range([0,h]);
 
-
-		var w = 700,
-		h = 600,
-		dataset = data(),
-		x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([0,w], 0.05),
-		y = d3.scale.linear().domain([0,d3.max(dataset)]).range([0,h]);
 
 		//set the data to the chart
 		makeAChart.setData(dataset);
