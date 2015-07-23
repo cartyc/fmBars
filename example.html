@@ -14,11 +14,12 @@
 	<script type="text/javascript">
 
 		// create new instance
-		var makeAChart = bars;
+		var makeAChart = bars,
+			dataset;
 
 
 		//Make a Random dataset
-		data = function(){
+		var data = function(){
 			var d = [];
 
 			for ( var i = 0; i < 20 ; i++){
@@ -28,12 +29,19 @@
 			return d;
 		}
 
-		var width = 700;
+
+
+		var w = 700,
+		h = 600,
+		dataset = data(),
+		x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([0,w], 0.05);
 
 		//set the data to the chart
-		makeAChart.setData(data);
-		makeAChart.width(width);
-		makeAChart.x(d3.scale.ordinal().domain(data).rangeRoundBands([0,width], 0.05));
+		makeAChart.setData(dataset);
+		makeAChart.width(w);
+		makeAChart.height(h);
+		makeAChart.xScale(x);
+		makeAChart.yScale(d3.scale.linear().domain([0,d3.max(dataset)]).range([0,h]))
 
 		//render it!
 		makeAChart.barChart("body");

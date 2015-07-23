@@ -7,7 +7,7 @@
 	//set global vars and defaults if any
 	var svg,
 		data,
-		x, y,
+		xScale, y,
 		height = 500,
 		width = 400;
 
@@ -29,22 +29,22 @@
 	}
 
 	//X Scale
-	bars.x = function(scale){
+	bars.xScale = function(scale){
 		if(!arguments){
-			return x;
+			return xScale;
 		} else{
-			x = scale;
+			xScale = scale;
 		}
 
 		return bars;
 	}
 
 	//Y Scale Accessor
-	bars.y = function(scale){
+	bars.yScale = function(scale){
 		if(!arguments){
-			return y;
+			return yScale;
 		} else {
-			y = scale;
+			yScale = scale;
 		}
 
 		return bars;
@@ -66,7 +66,7 @@
 		if(!arguments){
 			return width;
 		} else {
-			console.log(newWidth);
+			console.log(data);
 			width = newWidth;
 		}
 
@@ -97,15 +97,19 @@
 			.data(data)
 			.enter()
 			.append("rect")
+			.attr("x", function(d,i){
+				return xScale(i);
+			})
+			.attr("y", function(d){
+				return height - yScale(d);
+			})
 			.attr("height", function(d){
 				return d;
 			})
 			.attr("width", function(d){
-				return x.rangeBand();
+				return xScale.rangeBand();
 			})
-			.attr('x', function(d,i){
-				return x(i);
-			});
+;
 	};
 
   	//make objects callable
