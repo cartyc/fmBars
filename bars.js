@@ -104,7 +104,7 @@
 				return height - yScale(d);
 			})
 			.attr("height", function(d){
-				return d;
+				return yScale(d);
 			})
 			.attr("width", function(d){
 				return xScale.rangeBand();
