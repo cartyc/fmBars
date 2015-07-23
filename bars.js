@@ -7,7 +7,7 @@
 	//set global vars and defaults if any
 	var svg,
 		data,
-		x,y,
+		x, y,
 		height = 500,
 		width = 400;
 
@@ -15,32 +15,12 @@
 	bars.initialize = function(div){
 
 		svg = d3.select(div).append("svg")
-					.attr("height", 500)
-					.attr("width",400);
+					.attr("height", height)
+					.attr("width", width);
 
 		return bars
 	}
 
-
-	//Render the bar chart
-	bars.barChart = function(selector){
-
-		//initialze the svg element in the desired tag
-		//must preceed this code in the html
-		bars.initialize(selector);
-
-		//let render the bars!
-		svg.selectAll("rect")
-			.data(data)
-			.enter()
-			.append("rect")
-			.attr("height", function(d){
-				return d;
-			})
-			.attr("width", function(d){
-				return 5;
-			})
-	};
 
 
 	bars.lineChart = function(){
@@ -70,7 +50,6 @@
 		return bars;
 	}
 
-
 	//Height Accessor
 	bars.height = function(newHeight){
 		if(!arguments){
@@ -87,6 +66,7 @@
 		if(!arguments){
 			return width;
 		} else {
+			console.log(newWidth);
 			width = newWidth;
 		}
 
@@ -103,6 +83,30 @@
 
 		return bars;
 	}
+
+
+	//Render the bar chart
+	bars.barChart = function(selector){
+
+		//initialze the svg element in the desired tag
+		//must preceed this code in the html
+		bars.initialize(selector);
+
+		//let render the bars!
+		svg.selectAll("rect")
+			.data(data)
+			.enter()
+			.append("rect")
+			.attr("height", function(d){
+				return d;
+			})
+			.attr("width", function(d){
+				return x.rangeBand();
+			})
+			.attr('x', function(d,i){
+				return x(i);
+			});
+	};
 
   	//make objects callable
     if (typeof define === "function" && define.amd) define(bars); else if (typeof module === "object" && module.exports) module.exports = bars;

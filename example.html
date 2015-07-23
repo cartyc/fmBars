@@ -28,8 +28,12 @@
 			return d;
 		}
 
+		var width = 700;
+
 		//set the data to the chart
 		makeAChart.setData(data);
+		makeAChart.width(width);
+		makeAChart.x(d3.scale.ordinal().domain(data).rangeRoundBands([0,width], 0.05));
 
 		//render it!
 		makeAChart.barChart("body");
