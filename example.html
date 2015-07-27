@@ -4,7 +4,7 @@
 	<title>Example</title>
 	<meta charset="utf-8">
 	<script type="text/javascript" src="lib/d3.min.js"></script>
-	<script type="text/javascript" src="bars.js"></script>
+	<script type="text/javascript" src="fmBars.js"></script>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 		}
 
 		// create new instance and the rest of the parameters
-		var makeAChart = bars,
+		var makeAChart = fmBars.chart(),
 			dataset,
 			w = 1000,
 			h = 600,
@@ -40,6 +40,7 @@
 		makeAChart.height(h);
 		makeAChart.xScale(x);
 		makeAChart.yScale(y);
+		makeAChart.renderAxes();
 
 		//render it!
 		makeAChart.barChart("body");
