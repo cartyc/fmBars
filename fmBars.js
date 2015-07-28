@@ -1,5 +1,5 @@
 !function() {
-	var bars = {
+	var fmBars = {
     	version: "0.0.1",
     	author: "Chris Carty"
 	};
@@ -12,57 +12,58 @@
 		width = 400;
 
 	//Initialize the SVG
-	bars.initialize = function(div){
+	fmBars.initialize = function(div){
 
 		svg = d3.select(div).append("svg")
 					.attr("height", height)
 					.attr("width", width);
 
-		return bars
+		return fmBars;
 	}
 
 
 
-	bars.lineChart = function(){
+	fmBars.lineChart = function(){
 
 		//line chart code goes here
+		return fmBars;
 	}
 
 	//X Scale
-	bars.xScale = function(scale){
+	fmBars.xScale = function(scale){
 		if(!arguments){
 			return xScale;
 		} else{
 			xScale = scale;
 		}
 
-		return bars;
+		return fmBars;
 	}
 
 	//Y Scale Accessor
-	bars.yScale = function(scale){
+	fmBars.yScale = function(scale){
 		if(!arguments){
 			return yScale;
 		} else {
 			yScale = scale;
 		}
 
-		return bars;
+		return fmBars;
 	}
 
 	//Height Accessor
-	bars.height = function(newHeight){
+	fmBars.height = function(newHeight){
 		if(!arguments){
 			return height;
 		} else {
 			height = newHeight;
 		}
 
-		return bars;
+		return fmBars;
 	}
 
 	//Width Accessor
-	bars.width = function(newWidth){
+	fmBars.width = function(newWidth){
 		if(!arguments){
 			return width;
 		} else {
@@ -70,27 +71,27 @@
 			width = newWidth;
 		}
 
-		return bars;
+		return fmBars;
 	}
 
 	//Set the data
-	bars.setData = function(dataset){
+	fmBars.setData = function(dataset){
 		if (!arguments){
 			return data;
 		} else {
 			data = dataset;
 		}
 
-		return bars;
+		return fmBars;
 	}
 
 
 	//Render the bar chart
-	bars.barChart = function(selector){
+	fmBars.barChart = function(selector){
 
 		//initialze the svg element in the desired tag
 		//must preceed this code in the html
-		bars.initialize(selector);
+		fmBars.initialize(selector);
 
 		//let render the bars!
 		svg.selectAll("rect")
@@ -110,9 +111,11 @@
 				return xScale.rangeBand();
 			})
 ;
+
+		return fmBars;
 	};
 
   	//make objects callable
-    if (typeof define === "function" && define.amd) define(bars); else if (typeof module === "object" && module.exports) module.exports = bars;
-  this.bars = bars;
+    if (typeof define === "function" && define.amd) define(fmBars); else if (typeof module === "object" && module.exports) module.exports = fmBars;
+  this.fmBars = fmBars;
 }();
