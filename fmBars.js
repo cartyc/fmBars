@@ -7,6 +7,7 @@
 	//set global vars and defaults if any
 	var svg,
 		data,
+		color = d3.scale.category20c(),
 		xScale, y,
 		height = 500,
 		width = 400;
@@ -22,7 +23,7 @@
 	}
 
 
-
+	//Render a line chart
 	fmBars.lineChart = function(){
 
 		//line chart code goes here
@@ -109,6 +110,9 @@
 			})
 			.attr("width", function(d){
 				return xScale.rangeBand();
+			})
+			.attr("fill", function(d){
+				return color(d);
 			})
 ;
 
