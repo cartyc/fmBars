@@ -25,7 +25,6 @@
 		}
 
 
-
 		// create new instance and the rest of the parameters
 		var chart = fmBars,
 			dataset,
@@ -35,6 +34,7 @@
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([0,w], 0.05),
 			y = d3.scale.linear().domain([0,d3.max(dataset)]).range([0,h]);
 
+		console.log(dataset);
 
 		console.log(chart);
 		//set the data to the chart
