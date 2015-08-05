@@ -9,8 +9,8 @@
 		data,
 		color = d3.scale.category20c(),
 		xScale, y,
-		height = 500,
-		width = 400;
+		height,
+		width;
 
 	//Initialize the SVG
 	fmBars.initialize = function(div){
@@ -57,6 +57,7 @@
 		if(!arguments){
 			return height;
 		} else {
+			console.log(newHeight);
 			height = newHeight;
 		}
 
@@ -68,7 +69,7 @@
 		if(!arguments){
 			return width;
 		} else {
-			console.log(data);
+			console.log(newWidth);
 			width = newWidth;
 		}
 
@@ -92,8 +93,8 @@
 
 		//initialze the svg element in the desired tag
 		//must preceed this code in the html
-		fmBars.initialize(selector);
-
+		console.log(svg);
+		console.log(fmBars);
 		//let render the bars!
 		svg.selectAll("rect")
 			.data(data)
