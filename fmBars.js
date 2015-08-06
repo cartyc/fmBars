@@ -118,7 +118,7 @@
 				return color(d);
 			});
 
-		this.renderAxes(d3.scale.ordinal().domain(data).rangePoints([0, width - margin]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(data).rangePoints([margin, width - margin - margin]), "bottom");
 		this.renderAxes(d3.scale.linear().domain([d3.max(dataset), 0]).range([ margin, height - margin]), "right");
 
 		return fmBars;
@@ -133,6 +133,7 @@
 			.ticks(5);
 
 		svg.append("g")
+			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
 					return "translate(" + margin + "," + (height - margin) +")";
