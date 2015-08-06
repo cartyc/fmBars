@@ -30,9 +30,10 @@
 			dataset,
 			w = 800,
 			h = 600,
+			margin = 30,
 			dataset = data(),
-			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([0,w], 0.05),
-			y = d3.scale.linear().domain([0,d3.max(dataset)]).range([0,h]);
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w - margin], 0.05),
+			y = d3.scale.linear().domain([0,d3.max(dataset)]).range([ margin, h - margin]);
 
 		console.log(dataset);
 

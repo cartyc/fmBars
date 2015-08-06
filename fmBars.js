@@ -10,7 +10,9 @@
 		color = d3.scale.category20c(),
 		xScale, y,
 		height,
-		width;
+		width,
+		margin = 30,
+		offset = 20;
 
 	//Initialize the SVG
 	fmBars.initialize = function(div){
@@ -114,11 +116,33 @@
 			})
 			.attr("fill", function(d){
 				return color(d);
-			})
-;
+			});
+
+		this.renderAxes(d3.scale.ordinal().domain(data).rangePoints([0, width - margin]), "bottom");
+		this.renderAxes(d3.scale.linear().domain([d3.max(dataset), 0]).range([ margin, height - margin]), "right");
 
 		return fmBars;
 	};
+
+	//Lets make some Axes
+	fmBars.renderAxes = function(scale, orient){
+
+		var axes =  d3.svg.axis()
+			.scale(scale)
+			.orient(orient)
+			.ticks(5);
+
+		svg.append("g")
+			.attr("transform", function(){
+				if(["top", "bottom"].indexOf(orient) >= 0){
+					return "translate(" + margin + "," + (height - margin) +")";
+				} else {
+					return "translate(" + margin + "," + margin + ")";
+				}
+			})
+			.call(axes);
+		return fmBars;
+	}
 
   	//make objects callable
     if (typeof define === "function" && define.amd) define(fmBars); else if (typeof module === "object" && module.exports) module.exports = fmBars;
