@@ -129,7 +129,7 @@
 		// 		return d.x;
 		// 	})
 
-		this.renderAxes(d3.scale.ordinal().domain(data).rangeBands([margin, width - margin - margin]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(d3.range(function(d,i){return d.x;})).rangeBands([margin, width - margin - margin]), "bottom");
 		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin -margin ]), "left");
 
 		return fmBars;
