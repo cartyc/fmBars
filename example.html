@@ -21,15 +21,17 @@
 	<script type="text/javascript">
 
 		//Make a Random dataset
-		var data = function(){
-			var d = [];
 
-			for ( var i = 0; i < 20 ; i++){
-				d.push(Math.floor(Math.random() * 50) + 1); 
-			}
+		//JSON Dataset
+		var data = d3.range(20).map(function(i){
+			return { x: i , y: Math.floor(Math.random() * 50) + 1};
+		});	
 
-			return d;
-		}
+		// //List of Values
+		// var data = d3.range(20).map(function(i){
+		// 	return [i, Math.floor(Math.random() * 50) + 1];
+		// });
+
 
 
 		// create new instance and the rest of the parameters
@@ -38,9 +40,11 @@
 			w = 800,
 			h = 600,
 			margin = 30,
-			dataset = data(),
+			dataset = data,
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w - margin], 0.05),
-			y = d3.scale.linear().domain([0,d3.max(dataset)]).range([ margin, h - margin]);
+			y = d3.scale.linear().domain([d3.max(dataset, function(d){
+				return d.y;
+			}), 0]).range([ margin, h - margin]);
 
 		console.log(dataset);
 

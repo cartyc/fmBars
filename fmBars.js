@@ -106,20 +106,31 @@
 				return xScale(i);
 			})
 			.attr("y", function(d){
-				return height - yScale(d);
+				console.log(d.y);
+				return yScale(d.y);
 			})
 			.attr("height", function(d){
-				return yScale(d);
+				return (height - margin) - yScale(d.y);
 			})
 			.attr("width", function(d){
 				return xScale.rangeBand();
 			})
 			.attr("fill", function(d){
-				return color(d);
+				return color(d.y);
 			});
 
-		this.renderAxes(d3.scale.ordinal().domain(data).rangePoints([margin, width - margin - margin]), "bottom");
-		this.renderAxes(d3.scale.linear().domain([d3.max(dataset), 0]).range([ margin, height - margin]), "right");
+		// svg.append("text")
+		// 	.attr("x", (width / data.length) / 2)
+		// 	.attr("y", function(d){
+		// 		return yScale(d.y);
+		// 	})
+		// 	.attr("dy", ".75em")
+		// 	.text(function(d){
+		// 		return d.x;
+		// 	})
+
+		this.renderAxes(d3.scale.ordinal().domain(data).rangeBands([margin, width - margin - margin]), "bottom");
+		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin -margin ]), "left");
 
 		return fmBars;
 	};
