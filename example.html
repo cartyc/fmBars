@@ -11,6 +11,10 @@
 		stroke: black;
 		shape-rendering: crisp-edges;
 	}
+
+	.rect{
+		margin-right: 5px;
+	}
 	</style>
 </head>
 <body>
@@ -32,15 +36,11 @@
 			return { month: "Aug", x: i , y: random()}, {month: "July", x: i, y: random()};
 		});	
 
-		//Grouped Data
-		var gdata = d3.range(20).map(function(i){
-					return { month: "Aug", x: i , y: random()}, {month: "July", x: i, y: random()};
-				});
+
 		// //List of Values
 		// var data = d3.range(20).map(function(i){
 		// 	return [i, Math.floor(Math.random() * 50) + 1];
 		// });
-
 
 
 		// Bar Chart
@@ -50,10 +50,10 @@
 			h = 600,
 			margin = 30,
 			dataset = data,
-			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w - margin], 0.05),
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ margin, h - margin]);
+			}), 0]).range([ margin, h ]);
 
 		console.log(dataset);
 
@@ -71,19 +71,34 @@
 
 		chart.barChart();
 
+		//Grouped Data
+		// var gdata = d3.range(20).map(function(i){
+		// 			return { month: "Aug", values: {x: i , y: random()}}, {month: "July", values: {x: i , y: random()}};
+		// 		});
+		var n = 4, // number of layers
+		    m = 10, // number of samples per layer
+		    stack = d3.layout.stack(),
+		    gdata = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
+		    yGroupMax = d3.max(gdata, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
+		    yStackMax = d3.max(gdata, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
+
+
 
 		//Grouped Bar
 		var groupedChart = fmBars,
 			dataset,
-			w = 800,
-			h = 600,
-			margin = 30,
-			dataset = gdata,
-			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w - margin], 0.05),
-			y = d3.scale.linear().domain([d3.max(dataset, function(d){
-				return d.y;
-			}), 0]).range([ margin, h - margin]);
+			margin = {top: 30, right: 10, bottom: 20, left: 10},
+			w = 900 - margin.left - margin.right,
+			h = 600 - margin.top - margin.bottom,
+			dataset = gdata;
 
+		var x = d3.scale.ordinal()
+		    .domain(d3.range(m))
+		    .rangeRoundBands([0, w], .08);
+
+		var y = d3.scale.linear()
+		    .domain([0, yGroupMax])
+		    .range([h, 0]);
 
 		groupedChart.width(w);
 		groupedChart.height(h);
@@ -97,6 +112,24 @@
 		groupedChart.groupedBarChart();
 
 
+		// Inspired by Lee Byron's test data generator.
+		function bumpLayer(n, o) {
+
+		  function bump(a) {
+		    var x = 1 / (.1 + Math.random()),
+		        y = 2 * Math.random() - .5,
+		        z = 10 / (.1 + Math.random());
+		    for (var i = 0; i < n; i++) {
+		      var w = (i / n - y) * z;
+		      a[i] += x * Math.exp(-w * w);
+		    }
+		  }
+
+		  var a = [], i;
+		  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
+		  for (i = 0; i < 5; ++i) bump(a);
+		  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+		};
 	</script>
 
 

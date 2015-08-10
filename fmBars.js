@@ -21,7 +21,7 @@
 					.attr("height", height)
 					.attr("width", width);
 
-		console.log(svg);
+		// console.log(svg);
 		return fmBars;
 	}
 
@@ -128,40 +128,50 @@
 	//Group Bar Chart
 	fmBars.groupedBarChart = function(selector){
 
-		console.log("hello");
+		console.log(margin);
+		console.log(data);
 		// console.log(svg);
+		
+
 		var layer = svg.selectAll(".layer")
 			.data(data)
 			.enter()
 			.append("g")
-			.attr("class", "layer");
+			.attr("class", "layer")
+			.style("fill", function(d, i) { return color(i); });
 
 		var rect = layer.selectAll("rect")
 			.data(function(d){
-				return d.month;
+				return d;
 			})
 			.enter()
 			.append("rect")
-			.attr("x", function(d,i){
-				return xScale(d.x);
-			})
-			.attr("y", function(d){
-				return yScale(d.y);
-			})
-			.attr("width", function(d){
-				return xScale.rangeBand();
-			})
-			.attr("height", function(d){
-				return (height - margin) - yScale(d.y);
-			})
+		      .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / 4 * j; })
+			.attr("y", function(d) { return yScale(d.y); })
+		      .attr("width", x.rangeBand() / 4)
+			.attr("height", function(d) { return height - yScale(d.y); })
 			.attr("fill", function(d){
 				return color(d.y);
-			});
+			})
+			.attr("class", ".rect");
 
+
+			var xAxis = d3.svg.axis()
+			    .scale(xScale)
+			    .tickSize(0)
+			    .tickPadding(6)
+			    .orient("bottom");
+
+		  svg.append("g")
+		    .attr("class", "x axis")
+		    .attr("transform", "translate(0," + height + ")")
+		    .call(xAxis);
 
 			return fmBars
 
 	}
+
+
 	//Lets make some Axes
 	fmBars.renderAxes = function(scale, orient){
 
