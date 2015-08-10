@@ -21,6 +21,7 @@
 					.attr("height", height)
 					.attr("width", width);
 
+		console.log(svg);
 		return fmBars;
 	}
 
@@ -59,7 +60,7 @@
 		if(!arguments){
 			return height;
 		} else {
-			console.log(newHeight);
+			// console.log(newHeight);
 			height = newHeight;
 		}
 
@@ -71,7 +72,7 @@
 		if(!arguments){
 			return width;
 		} else {
-			console.log(newWidth);
+			// console.log(newWidth);
 			width = newWidth;
 		}
 
@@ -93,10 +94,7 @@
 	//Render the bar chart
 	fmBars.barChart = function(selector){
 
-		//initialze the svg element in the desired tag
-		//must preceed this code in the html
-		console.log(svg);
-		console.log(fmBars);
+
 		//let render the bars!
 		svg.selectAll("rect")
 			.data(data)
@@ -106,7 +104,7 @@
 				return xScale(i);
 			})
 			.attr("y", function(d){
-				console.log(d.y);
+				// console.log(d.y);
 				return yScale(d.y);
 			})
 			.attr("height", function(d){
@@ -119,15 +117,6 @@
 				return color(d.y);
 			});
 
-		// svg.append("text")
-		// 	.attr("x", (width / data.length) / 2)
-		// 	.attr("y", function(d){
-		// 		return yScale(d.y);
-		// 	})
-		// 	.attr("dy", ".75em")
-		// 	.text(function(d){
-		// 		return d.x;
-		// 	})
 
 		this.renderAxes(d3.scale.ordinal().domain(d3.range(function(d,i){return d.x;})).rangeBands([margin, width - margin - margin]), "bottom");
 		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin -margin ]), "left");
@@ -135,6 +124,44 @@
 		return fmBars;
 	};
 
+
+	//Group Bar Chart
+	fmBars.groupedBarChart = function(selector){
+
+		console.log("hello");
+		// console.log(svg);
+		var layer = svg.selectAll(".layer")
+			.data(data)
+			.enter()
+			.append("g")
+			.attr("class", "layer");
+
+		var rect = layer.selectAll("rect")
+			.data(function(d){
+				return d.month;
+			})
+			.enter()
+			.append("rect")
+			.attr("x", function(d,i){
+				return xScale(d.x);
+			})
+			.attr("y", function(d){
+				return yScale(d.y);
+			})
+			.attr("width", function(d){
+				return xScale.rangeBand();
+			})
+			.attr("height", function(d){
+				return (height - margin) - yScale(d.y);
+			})
+			.attr("fill", function(d){
+				return color(d.y);
+			});
+
+
+			return fmBars
+
+	}
 	//Lets make some Axes
 	fmBars.renderAxes = function(scale, orient){
 

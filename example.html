@@ -18,15 +18,24 @@
 	<div id="chart">
 	</div>
 
+	<div id="grouped">
+	</div>
+
 	<script type="text/javascript">
 
 		//Make a Random dataset
-
+		var random = function(){
+			return Math.floor(Math.random() * 50) + 1;
+		}
 		//JSON Dataset
 		var data = d3.range(20).map(function(i){
-			return { x: i , y: Math.floor(Math.random() * 50) + 1};
+			return { month: "Aug", x: i , y: random()}, {month: "July", x: i, y: random()};
 		});	
 
+		//Grouped Data
+		var gdata = d3.range(20).map(function(i){
+					return { month: "Aug", x: i , y: random()}, {month: "July", x: i, y: random()};
+				});
 		// //List of Values
 		// var data = d3.range(20).map(function(i){
 		// 	return [i, Math.floor(Math.random() * 50) + 1];
@@ -34,7 +43,7 @@
 
 
 
-		// create new instance and the rest of the parameters
+		// Bar Chart
 		var chart = fmBars,
 			dataset,
 			w = 800,
@@ -54,13 +63,38 @@
 
 		chart.width(w);
 		chart.height(h);
-		chart.initialize("body");
+		chart.initialize("#chart");
 		chart.setData(dataset);
 		chart.xScale(x);
 		chart.yScale(y);
 
-		//render it!
+
 		chart.barChart();
+
+
+		//Grouped Bar
+		var groupedChart = fmBars,
+			dataset,
+			w = 800,
+			h = 600,
+			margin = 30,
+			dataset = gdata,
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w - margin], 0.05),
+			y = d3.scale.linear().domain([d3.max(dataset, function(d){
+				return d.y;
+			}), 0]).range([ margin, h - margin]);
+
+
+		groupedChart.width(w);
+		groupedChart.height(h);
+		groupedChart.initialize("#grouped");
+		groupedChart.setData(dataset);
+		groupedChart.xScale(x);
+		groupedChart.yScale(y);
+
+		//render it!
+		
+		groupedChart.groupedBarChart();
 
 
 	</script>
