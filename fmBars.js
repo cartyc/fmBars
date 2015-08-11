@@ -18,8 +18,9 @@
 	fmBars.initialize = function(div){
 
 		svg = d3.select(div).append("svg")
-					.attr("height", height)
-					.attr("width", width);
+					.attr("height", height +margin + margin)
+					.attr("width", width + margin + margin)
+					.attr("class", ".chartArea");
 
 		// console.log(svg);
 		return fmBars;
@@ -108,7 +109,7 @@
 				return yScale(d.y);
 			})
 			.attr("height", function(d){
-				return (height - margin) - yScale(d.y);
+				return height - yScale(d.y);
 			})
 			.attr("width", function(d){
 				return xScale.rangeBand();
@@ -118,8 +119,10 @@
 			});
 
 
-		this.renderAxes(d3.scale.ordinal().domain(d3.range(function(d,i){return d.x;})).rangeBands([margin, width - margin - margin]), "bottom");
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin -margin ]), "left");
+		//x-Axis
+		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width ]), "bottom");
+		//y-Axis
+		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin ]), "left");
 
 		return fmBars;
 	};
@@ -146,26 +149,19 @@
 			})
 			.enter()
 			.append("rect")
-		      .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / 4 * j; })
+		    .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / 4 * j; })
 			.attr("y", function(d) { return yScale(d.y); })
-		      .attr("width", x.rangeBand() / 4)
+		    .attr("width", x.rangeBand() / 4)
 			.attr("height", function(d) { return height - yScale(d.y); })
 			.attr("fill", function(d){
 				return color(d.y);
 			})
 			.attr("class", ".rect");
 
-
-			var xAxis = d3.svg.axis()
-			    .scale(xScale)
-			    .tickSize(0)
-			    .tickPadding(6)
-			    .orient("bottom");
-
-		  svg.append("g")
-		    .attr("class", "x axis")
-		    .attr("transform", "translate(0," + height + ")")
-		    .call(xAxis);
+			//Render xAxis
+		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin], .08), "bottom");
+		  	//Render yAxis
+			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ 0, height - margin ]), "left");
 
 			return fmBars
 
@@ -184,7 +180,7 @@
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + margin + "," + (height - margin) +")";
+					return "translate(" + margin + "," + (height) +")";
 				} else {
 					return "translate(" + margin + "," + margin + ")";
 				}

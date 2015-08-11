@@ -6,6 +6,10 @@
 	<script type="text/javascript" src="lib/d3.min.js"></script>
 	<script type="text/javascript" src="fmBars.js"></script>
 	<style type="text/css">
+
+	.chartArea{
+		fill: #f0f;
+	}
 	.axis path, .axis line{
 		fill: none;
 		stroke: black;
@@ -29,11 +33,11 @@
 
 		//Make a Random dataset
 		var random = function(){
-			return Math.floor(Math.random() * 50) + 1;
+			return Math.floor(Math.random() * 100) + 1;
 		}
 		//JSON Dataset
 		var data = d3.range(20).map(function(i){
-			return { month: "Aug", x: i , y: random()}, {month: "July", x: i, y: random()};
+			return { x: i , y: random()};
 		});	
 
 
@@ -53,7 +57,7 @@
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ margin, h ]);
+			}), 0]).range([ h, margin]);
 
 		console.log(dataset);
 
@@ -72,9 +76,7 @@
 		chart.barChart();
 
 		//Grouped Data
-		// var gdata = d3.range(20).map(function(i){
-		// 			return { month: "Aug", values: {x: i , y: random()}}, {month: "July", values: {x: i , y: random()}};
-		// 		});
+
 		var n = 4, // number of layers
 		    m = 10, // number of samples per layer
 		    stack = d3.layout.stack(),
@@ -83,7 +85,8 @@
 		    yStackMax = d3.max(gdata, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
 
-
+		console.log("gdata");
+		console.log(gdata);
 		//Grouped Bar
 		var groupedChart = fmBars,
 			dataset,
