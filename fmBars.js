@@ -17,9 +17,10 @@
 	//Initialize the SVG
 	fmBars.initialize = function(div){
 
+		console.log(margin)
 		svg = d3.select(div).append("svg")
-					.attr("height", height +margin + margin)
-					.attr("width", width + margin + margin)
+					.attr("height", height + margin.top + margin.bottom)
+					.attr("width", width + margin.left + margin.right)
 					.attr("class", ".chartArea");
 
 		// console.log(svg);
@@ -91,6 +92,15 @@
 		return fmBars;
 	}
 
+	fmBars.margins = function(newMargins){
+		if (!arguments){
+			return margin;
+		} else {
+			margin = newMargins;
+		}
+
+		return fmBars;
+	}
 
 	//Render the bar chart
 	fmBars.barChart = function(selector){
@@ -119,10 +129,11 @@
 			});
 
 
+		console.log(margin)
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width ]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([margin.right, width ]), "bottom");
 		//y-Axis
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin ]), "left");
+		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ margin.left + margin.right, height - margin.bottom ]), "left");
 
 		return fmBars;
 	};
@@ -159,9 +170,9 @@
 			.attr("class", ".rect");
 
 			//Render xAxis
-		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin], .08), "bottom");
+		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([margin.left,width], .08), "bottom");
 		  	//Render yAxis
-			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ 0, height - margin ]), "left");
+			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ margin.right, height- margin.bottom ]), "left");
 
 			return fmBars
 
@@ -180,9 +191,9 @@
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + margin + "," + (height) +")";
+					return "translate(" + margin.top + "," + (height) +")";
 				} else {
-					return "translate(" + margin + "," + margin + ")";
+					return "translate(" + margin.right + "," + margin.bottom + ")";
 				}
 			})
 			.call(axes);
