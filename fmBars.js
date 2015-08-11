@@ -131,7 +131,7 @@
 
 		console.log(margin)
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([margin.right, width ]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(data).rangeBands([margin.right, width ]), "bottom");
 		//y-Axis
 		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ margin.left + margin.right, height - margin.bottom ]), "left");
 
@@ -170,9 +170,9 @@
 			.attr("class", ".rect");
 
 			//Render xAxis
-		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([margin.left,width], .08), "bottom");
+		  	this.renderAxes(d3.scale.ordinal().domain(d3.map(data, function(d){return d.x;})).rangeRoundBands([margin.left,width], .08), "bottom");
 		  	//Render yAxis
-			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ margin.right, height- margin.bottom ]), "left");
+			this.renderAxes(d3.scale.linear().domain([d3.max(function(d, i){ return d.y}), 0]).range([ margin.right, height - margin.bottom ]), "left");
 
 			return fmBars
 
@@ -185,13 +185,13 @@
 		var axes =  d3.svg.axis()
 			.scale(scale)
 			.orient(orient)
-			.ticks(5);
+			.ticks(6);
 
 		svg.append("g")
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + margin.top + "," + (height) +")";
+					return "translate(" + margin.top + "," + height +")";
 				} else {
 					return "translate(" + margin.right + "," + margin.bottom + ")";
 				}
