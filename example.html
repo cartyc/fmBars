@@ -50,14 +50,14 @@
 		// Bar Chart
 		var chart = fmBars,
 			dataset,
-			w = 800,
-			h = 600,
-			margin = {top: 30, right: 10, bottom: 20, left: 10},
+			margin = {top: 30, right: 10, bottom: 20, left: 50},
 			dataset = data,
+			w = 900 - margin.left - margin.right,
+			h = 600 - margin.top - margin.bottom,
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ h, margin.top + margin.bottom]);
+			}), 0]).range([ h - margin.bottom - margin.top, 200]);
 
 		console.log(dataset);
 
@@ -91,18 +91,19 @@
 		//Grouped Bar
 		var groupedChart = fmBars,
 			dataset,
-			margin = {top: 30, right: 10, bottom: 20, left: 10},
+			padding = 20,
+			margin = {top: 30, right: 10, bottom: 20, left: 50},
 			w = 900 - margin.left - margin.right,
 			h = 600 - margin.top - margin.bottom,
 			dataset = gdata;
 
 		var x = d3.scale.ordinal()
 		    .domain(d3.range(m))
-		    .rangeRoundBands([0, w], .08);
+		    .rangeRoundBands([margin.left + padding, w], .08);
 
 		var y = d3.scale.linear()
 		    .domain([0, yGroupMax])
-		    .range([h, 0]);
+		    .range([h - margin.top, margin.bottom]);
 
 		groupedChart.width(w);
 		groupedChart.height(h);

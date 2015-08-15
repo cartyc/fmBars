@@ -127,7 +127,7 @@ fmBars.margin = function(newMargins){
 
 
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width ]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width - margin.left ]), "bottom");
 		//y-Axis
 		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin.bottom - margin.top ]), "left");
 
@@ -166,9 +166,9 @@ fmBars.margin = function(newMargins){
 			.attr("class", ".rect");
 
 			//Render xAxis
-		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin], .08), "bottom");
+		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin.left - margin.right], .08), "bottom");
 		  	//Render yAxis
-			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ 0, height - margin ]), "left");
+			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ margin.left, height]), "left");
 
 			return fmBars
 
@@ -187,7 +187,7 @@ fmBars.margin = function(newMargins){
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + margin.right + "," + (height) +")";
+					return "translate(" + (margin.right + margin.left) + "," + (height ) +")";
 				} else {
 					return "translate(" + (margin.left + margin.right) + "," + 0 + ")";
 				}
