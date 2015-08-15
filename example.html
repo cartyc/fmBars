@@ -5,10 +5,28 @@
 	<meta charset="utf-8">
 	<script type="text/javascript" src="lib/d3.min.js"></script>
 	<script type="text/javascript" src="fmBars.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
 	<style type="text/css">
 
+	*{
+		font-family: Roboto;
+		margin: 0;
+	}
+
+	#header{
+		color: #fff;
+		font-size: 4em;
+		background-color: #4A148C;
+		font-family: Roboto;
+		font-weight: 900;
+	}
+
+	#title{
+		margin-left: 20px;
+	}
+
 	.chartArea{
-		fill: #f0f;
+		margin: 40px;
 	}
 	.axis path, .axis line{
 		fill: none;
@@ -23,10 +41,14 @@
 </head>
 <body>
 
-	<div id="chart">
+	<div id="header">
+		<span id="title">fmBars Examples</span>
 	</div>
 
-	<div id="grouped">
+	<div id="chart" class="chartArea">
+	</div>
+
+	<div id="grouped" class="chartArea">
 	</div>
 
 	<script type="text/javascript">
@@ -50,6 +72,7 @@
 		// Bar Chart
 		var chart = fmBars,
 			dataset,
+<<<<<<< HEAD
 			margin = {top: 30, right: 10, bottom: 20, left: 50},
 			dataset = data,
 			w = 900 - margin.left - margin.right,
@@ -58,6 +81,16 @@
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
 			}), 0]).range([ h - margin.bottom - margin.top, 200]);
+=======
+			w = 800,
+			h = 600,
+			margin = {top: 30, right: 50, bottom: 20, left: 10},
+			dataset = data,
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left + margin.right, w], 0.05),
+			y = d3.scale.linear().domain([d3.max(dataset, function(d){
+				return d.y;
+			}), 0]).range([ h, margin.top]);
+>>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 
 		console.log(dataset);
 
@@ -67,7 +100,11 @@
 
 		chart.width(w);
 		chart.height(h);
+<<<<<<< HEAD
 		chart.margin(margin);
+=======
+		chart.margins(margin);
+>>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 		chart.initialize("#chart");
 		chart.setData(dataset);
 		chart.xScale(x);
@@ -91,15 +128,23 @@
 		//Grouped Bar
 		var groupedChart = fmBars,
 			dataset,
+<<<<<<< HEAD
 			padding = 20,
 			margin = {top: 30, right: 10, bottom: 20, left: 50},
+=======
+			margin = {top: 30, right: 50, bottom: 20, left: 10},
+>>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 			w = 900 - margin.left - margin.right,
 			h = 600 - margin.top - margin.bottom,
 			dataset = gdata;
 
 		var x = d3.scale.ordinal()
 		    .domain(d3.range(m))
+<<<<<<< HEAD
 		    .rangeRoundBands([margin.left + padding, w], .08);
+=======
+		    .rangeRoundBands([50, w], .08);
+>>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 
 		var y = d3.scale.linear()
 		    .domain([0, yGroupMax])
@@ -107,7 +152,11 @@
 
 		groupedChart.width(w);
 		groupedChart.height(h);
+<<<<<<< HEAD
 		groupedChart.margin(margin);
+=======
+		groupedChart.margins(margin);
+>>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 		groupedChart.initialize("#grouped");
 		groupedChart.setData(dataset);
 		groupedChart.xScale(x);
