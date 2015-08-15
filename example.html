@@ -38,7 +38,7 @@
 		//JSON Dataset
 		var data = d3.range(20).map(function(i){
 			return { x: i , y: random()};
-		});	
+		});
 
 
 		// //List of Values
@@ -52,12 +52,12 @@
 			dataset,
 			w = 800,
 			h = 600,
-			margin = 30,
+			margin = {top: 30, right: 10, bottom: 20, left: 10},
 			dataset = data,
-			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin, w], 0.05),
+			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ h, margin]);
+			}), 0]).range([ h, margin.top + margin.bottom]);
 
 		console.log(dataset);
 
@@ -67,6 +67,7 @@
 
 		chart.width(w);
 		chart.height(h);
+		chart.margin(margin);
 		chart.initialize("#chart");
 		chart.setData(dataset);
 		chart.xScale(x);
@@ -105,13 +106,14 @@
 
 		groupedChart.width(w);
 		groupedChart.height(h);
+		groupedChart.margin(margin);
 		groupedChart.initialize("#grouped");
 		groupedChart.setData(dataset);
 		groupedChart.xScale(x);
 		groupedChart.yScale(y);
 
 		//render it!
-		
+
 		groupedChart.groupedBarChart();
 
 

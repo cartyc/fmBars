@@ -18,8 +18,8 @@
 	fmBars.initialize = function(div){
 
 		svg = d3.select(div).append("svg")
-					.attr("height", height +margin + margin)
-					.attr("width", width + margin + margin)
+					.attr("height", height + margin.top + margin.bottom)
+					.attr("width", width + margin.left + margin.right)
 					.attr("class", ".chartArea");
 
 		// console.log(svg);
@@ -91,6 +91,13 @@
 		return fmBars;
 	}
 
+fmBars.margin = function(newMargins){
+		if(!arguments){
+			return margin;
+		} else {
+			margin = newMargins;
+		}
+}
 
 	//Render the bar chart
 	fmBars.barChart = function(selector){
@@ -122,7 +129,7 @@
 		//x-Axis
 		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width ]), "bottom");
 		//y-Axis
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin ]), "left");
+		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin.bottom - margin.top ]), "left");
 
 		return fmBars;
 	};
@@ -134,7 +141,7 @@
 		console.log(margin);
 		console.log(data);
 		// console.log(svg);
-		
+
 
 		var layer = svg.selectAll(".layer")
 			.data(data)
@@ -180,9 +187,9 @@
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + margin + "," + (height) +")";
+					return "translate(" + margin.right + "," + (height) +")";
 				} else {
-					return "translate(" + margin + "," + margin + ")";
+					return "translate(" + (margin.left + margin.right) + "," + 0 + ")";
 				}
 			})
 			.call(axes);
