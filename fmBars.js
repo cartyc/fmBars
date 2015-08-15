@@ -141,10 +141,17 @@ fmBars.setMax = function(maxHeight){
 				return color(d.y);
 			});
 
+		var xLabels = [];
+		console.log("Mapping");
+		for ( var i = 0 ; i < data.length; i++){
+				xLabels.push(data[i].x);
+				console.log(i);
+		}
 
-		console.log(margin)
+		console.log(xLabels);
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([margin.left, width ]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.left + margin.right, w], 0.05), "bottom");
+		// this.renderAxes(xScale, "bottom");
 		//y-Axis
 		// this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height -margin.top - margin.bottom ]), "left");
 		this.renderAxes(yScale, "left");
