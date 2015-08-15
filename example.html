@@ -12,7 +12,7 @@
 		font-family: Roboto;
 		margin: 0;
 	}
-	
+
 	/*svg{
 		background-color: #BDBDBD;
 	}*/
@@ -76,14 +76,15 @@
 		// Bar Chart
 		var chart = fmBars,
 			dataset,
-			margin = {top: 30, right: 50, bottom: 50, left: 10},
+			margin = {top: 30, right: 50, bottom: 50, left: 50},
 			dataset = data,
 			w = 900,
 			h = 600,
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left + margin.right, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ h - margin.top - margin.bottom, 10]);
+			}), 0]).range([margin.bottom, h - margin.top - margin.bottom]);
+;
 
 
 		//set the data to the chart

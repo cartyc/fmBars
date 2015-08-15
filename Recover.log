@@ -1,0 +1,21 @@
+﻿Timestamp	Filename	Error	Message
+2015-07-27 21:30:02.307 -0400	chartExample.fmp12	0	*** Started consistency check of improperly closed file, total of 44 block(s) to check
+2015-07-27 21:30:02.432 -0400	chartExample.fmp12	8432	Page 39 marked free but not in free list
+2015-07-27 21:30:02.432 -0400	chartExample.fmp12	0	Reset maximum block sequence number to 1516
+2015-07-27 21:30:02.434 -0400	chartExample.fmp12	0	*** Completed consistency check, checked 44 block(s)
+2015-07-27 21:30:12.513 -0400	chartExample.fmp12	0	*** Started consistency check of improperly closed file, total of 44 block(s) to check
+2015-07-27 21:30:12.638 -0400	chartExample.fmp12	8432	Page 39 marked free but not in free list
+2015-07-27 21:30:12.638 -0400	chartExample.fmp12	0	Reset maximum block sequence number to 1516
+2015-07-27 21:30:12.640 -0400	chartExample.fmp12	0	*** Completed consistency check, checked 44 block(s)
+2015-08-03 21:21:25.096 -0400	chartExample.fmp12	0	*** Started consistency check of improperly closed file, total of 44 block(s) to check
+2015-08-03 21:21:25.191 -0400	chartExample.fmp12	8432	Page 39 marked free but not in free list
+2015-08-03 21:21:25.192 -0400	chartExample.fmp12	0	Reset maximum block sequence number to 1516
+2015-08-03 21:21:25.193 -0400	chartExample.fmp12	0	*** Completed consistency check, checked 44 block(s)
+2015-08-03 21:21:58.284 -0400	chartExample.fmp12	0	*** Started consistency check of improperly closed file, total of 44 block(s) to check
+2015-08-03 21:21:58.395 -0400	chartExample.fmp12	8432	Page 39 marked free but not in free list
+2015-08-03 21:21:58.402 -0400	chartExample.fmp12	0	Reset maximum block sequence number to 1516
+2015-08-03 21:21:58.402 -0400	chartExample.fmp12	0	*** Completed consistency check, checked 44 block(s)
+2015-08-03 21:59:23.656 -0400	chartExample.fmp12	0	*** Started consistency check of improperly closed file, total of 44 block(s) to check
+2015-08-03 21:59:23.657 -0400	chartExample.fmp12	8432	Page 39 marked free but not in free list
+2015-08-03 21:59:23.657 -0400	chartExample.fmp12	0	Reset maximum block sequence number to 1516
+2015-08-03 21:59:23.657 -0400	chartExample.fmp12	0	*** Completed consistency check, checked 44 block(s)

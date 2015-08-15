@@ -12,6 +12,7 @@
 		xScale, y,
 		height,
 		width,
+		padding = 20,
 		margin = 30,
 		offset = 20;
 
@@ -145,8 +146,8 @@ fmBars.setMax = function(maxHeight){
 		//x-Axis
 		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([margin.left, width ]), "bottom");
 		//y-Axis
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height -margin.top - margin.bottom ]), "left");
-
+		// this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height -margin.top - margin.bottom ]), "left");
+		this.renderAxes(yScale, "left");
 
 		return fmBars;
 	};
@@ -184,8 +185,9 @@ fmBars.setMax = function(maxHeight){
 			.attr("class", ".rect");
 
 			//Render xAxis
-	  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([margin.left ,width - margin.left - margin.right], .08), "bottom");
-		  	//Render yAxis
+	  	// this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d[0].x;}).rangeRoundBands([margin.left ,width - margin.left - margin.right], .08), "bottom");
+		  this.renderAxes(xScale, "bottom");
+				//Render yAxis
 			// this.renderAxes(d3.scale.linear().domain([max, 0]).range([ margin.bottom, height - margin.top - margin.bottom]), "left");
 			this.renderAxes(yScale, "left");
 
@@ -200,15 +202,15 @@ fmBars.setMax = function(maxHeight){
 		var axes =  d3.svg.axis()
 			.scale(scale)
 			.orient(orient)
-			.ticks(6);
+			.ticks(10);
 
 		svg.append("g")
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + (0) + "," + (height - margin.bottom - margin.top)  +")";
+					return "translate(" + 0 + "," + (height - margin.bottom - margin.top)  +")";
 				} else {
-					return "translate(" + 50 + "," + (margin.bottom - margin.top - padding ) + ")";
+					return "translate(" + 50 + "," + (margin.bottom - margin.top - padding  ) + ")";
 
 				}
 			})
