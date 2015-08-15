@@ -12,6 +12,10 @@
 		font-family: Roboto;
 		margin: 0;
 	}
+	
+	/*svg{
+		background-color: #BDBDBD;
+	}*/
 
 	#header{
 		color: #fff;
@@ -72,22 +76,17 @@
 		// Bar Chart
 		var chart = fmBars,
 			dataset,
-
-			w = 800,
-			h = 600,
-			margin = {top: 30, right: 50, bottom: 20, left: 10},
+			margin = {top: 30, right: 50, bottom: 50, left: 10},
 			dataset = data,
+			w = 900,
+			h = 600,
 			x = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left + margin.right, w], 0.05),
 			y = d3.scale.linear().domain([d3.max(dataset, function(d){
 				return d.y;
-			}), 0]).range([ h, margin.top]);
+			}), 0]).range([ h - margin.top - margin.bottom, 10]);
 
-		console.log(dataset);
 
-		console.log(chart);
 		//set the data to the chart
-
-
 		chart.width(w);
 		chart.height(h);
 		chart.margin(margin);
@@ -99,6 +98,8 @@
 
 		chart.barChart();
 
+
+		//////////////////////////////////////////
 		//Grouped Data
 
 		var n = 4, // number of layers
@@ -115,21 +116,22 @@
 		var groupedChart = fmBars,
 			dataset,
 			padding = 20,
-			margin = {top: 30, right: 10, bottom: 20, left: 50},
-			w = 900 - margin.left - margin.right,
-			h = 600 - margin.top - margin.bottom,
+			margin = {top: 30, right: 10, bottom: 50, left: 50},
+			w = 900,
+			h = 600,
 			dataset = gdata;
 
 		var x = d3.scale.ordinal()
 		    .domain(d3.range(m))
-		    .rangeRoundBands([margin.left + padding, w], .08);
+		    .rangeRoundBands([margin.left, w - margin.left - margin.right], .08);
 
 		var y = d3.scale.linear()
-		    .domain([0, yGroupMax])
-		    .range([h - margin.top, margin.bottom]);
+		    .domain([ yGroupMax, 0])
+		    .range([margin.bottom, h - margin.top - margin.bottom]);
 
 		groupedChart.width(w);
 		groupedChart.height(h);
+		groupedChart.setMax(yGroupMax);
 		groupedChart.margin(margin);
 		groupedChart.initialize("#grouped");
 		groupedChart.setData(dataset);

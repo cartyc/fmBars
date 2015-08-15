@@ -7,6 +7,7 @@
 	//set global vars and defaults if any
 	var svg,
 		data,
+		max,
 		color = d3.scale.category20c(),
 		xScale, y,
 		height,
@@ -19,8 +20,8 @@
 
 		console.log(margin)
 		svg = d3.select(div).append("svg")
-					.attr("height", height + margin.top + margin.bottom)
-					.attr("width", width + margin.left + margin.right)
+					.attr("height", height)
+					.attr("width", width)
 					.attr("class", ".chartArea");
 
 		// console.log(svg);
@@ -103,6 +104,16 @@ fmBars.margin = function(newMargins){
 		return fmBars;
 	}
 
+fmBars.setMax = function(maxHeight){
+		if(!arguments){
+			return max;
+		} else{
+			max = maxHeight;
+		}
+
+		return fmBars;
+}
+
 	//Render the bar chart
 	fmBars.barChart = function(selector){
 
@@ -120,7 +131,7 @@ fmBars.margin = function(newMargins){
 				return yScale(d.y);
 			})
 			.attr("height", function(d){
-				return height - yScale(d.y);
+				return (height -margin.top - margin.bottom) - yScale(d.y);
 			})
 			.attr("width", function(d){
 				return xScale.rangeBand();
@@ -132,16 +143,17 @@ fmBars.margin = function(newMargins){
 
 		console.log(margin)
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width - margin.left ]), "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([margin.left, width ]), "bottom");
 		//y-Axis
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin.bottom - margin.top ]), "left");
+		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height -margin.top - margin.bottom ]), "left");
 
 
 		return fmBars;
 	};
 
-
+	///////////////////////////
 	//Group Bar Chart
+
 	fmBars.groupedBarChart = function(selector){
 
 		console.log(margin);
@@ -165,17 +177,17 @@ fmBars.margin = function(newMargins){
 		    .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / 4 * j; })
 			.attr("y", function(d) { return yScale(d.y); })
 		    .attr("width", x.rangeBand() / 4)
-			.attr("height", function(d) { return height - yScale(d.y); })
+			.attr("height", function(d) { return (height - margin.top - margin.bottom) - yScale(d.y); })
 			.attr("fill", function(d){
 				return color(d.y);
 			})
 			.attr("class", ".rect");
 
 			//Render xAxis
-	  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin.left - margin.right], .08), "bottom");
+	  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([margin.left ,width - margin.left - margin.right], .08), "bottom");
 		  	//Render yAxis
-			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ margin.left, height]), "left");
-
+			// this.renderAxes(d3.scale.linear().domain([max, 0]).range([ margin.bottom, height - margin.top - margin.bottom]), "left");
+			this.renderAxes(yScale, "left");
 
 			return fmBars
 
@@ -194,9 +206,9 @@ fmBars.margin = function(newMargins){
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-					return "translate(" + (margin.right + margin.left) + "," + (height ) +")";
+					return "translate(" + (0) + "," + (height - margin.bottom - margin.top)  +")";
 				} else {
-					return "translate(" + (margin.left + margin.right) + "," + 0 + ")";
+					return "translate(" + 50 + "," + (margin.bottom - margin.top - padding ) + ")";
 
 				}
 			})
