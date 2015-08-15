@@ -92,24 +92,16 @@
 		return fmBars;
 	}
 
-<<<<<<< HEAD
 fmBars.margin = function(newMargins){
 		if(!arguments){
-=======
-	fmBars.margins = function(newMargins){
-		if (!arguments){
->>>>>>> 99e1619d8ea33170a567a93a173947163630618c
+
 			return margin;
 		} else {
 			margin = newMargins;
 		}
-<<<<<<< HEAD
-}
-=======
 
 		return fmBars;
 	}
->>>>>>> 99e1619d8ea33170a567a93a173947163630618c
 
 	//Render the bar chart
 	fmBars.barChart = function(selector){
@@ -140,15 +132,10 @@ fmBars.margin = function(newMargins){
 
 		console.log(margin)
 		//x-Axis
-<<<<<<< HEAD
 		this.renderAxes(d3.scale.ordinal().domain(data, function(d,i){return d.x;}).rangeBands([0, width - margin.left ]), "bottom");
 		//y-Axis
 		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height - margin.bottom - margin.top ]), "left");
-=======
-		this.renderAxes(d3.scale.ordinal().domain(data).rangeBands([margin.right, width ]), "bottom");
-		//y-Axis
-		this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ margin.left + margin.right, height - margin.bottom ]), "left");
->>>>>>> 99e1619d8ea33170a567a93a173947163630618c
+
 
 		return fmBars;
 	};
@@ -185,15 +172,10 @@ fmBars.margin = function(newMargins){
 			.attr("class", ".rect");
 
 			//Render xAxis
-<<<<<<< HEAD
-		  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin.left - margin.right], .08), "bottom");
+	  	this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d.x;}).rangeRoundBands([0,width- margin.left - margin.right], .08), "bottom");
 		  	//Render yAxis
 			this.renderAxes(d3.scale.linear().domain([100, 0]).range([ margin.left, height]), "left");
-=======
-		  	this.renderAxes(d3.scale.ordinal().domain(d3.map(data, function(d){return d.x;})).rangeRoundBands([margin.left,width], .08), "bottom");
-		  	//Render yAxis
-			this.renderAxes(d3.scale.linear().domain([d3.max(function(d, i){ return d.y}), 0]).range([ margin.right, height - margin.bottom ]), "left");
->>>>>>> 99e1619d8ea33170a567a93a173947163630618c
+
 
 			return fmBars
 
@@ -212,15 +194,10 @@ fmBars.margin = function(newMargins){
 			.attr("class", "axis")
 			.attr("transform", function(){
 				if(["top", "bottom"].indexOf(orient) >= 0){
-<<<<<<< HEAD
 					return "translate(" + (margin.right + margin.left) + "," + (height ) +")";
 				} else {
 					return "translate(" + (margin.left + margin.right) + "," + 0 + ")";
-=======
-					return "translate(" + margin.top + "," + height +")";
-				} else {
-					return "translate(" + margin.right + "," + margin.bottom + ")";
->>>>>>> 99e1619d8ea33170a567a93a173947163630618c
+
 				}
 			})
 			.call(axes);
