@@ -19,7 +19,6 @@
 	//Initialize the SVG
 	fmBars.initialize = function(div){
 
-		console.log(margin)
 		svg = d3.select(div).append("svg")
 					.attr("height", height)
 					.attr("width", width)
@@ -114,8 +113,10 @@ fmBars.setMax = function(maxHeight){
 
 		return fmBars;
 }
-
+	///////////////////////////
 	//Render the bar chart
+	///////////////////////////
+
 	fmBars.barChart = function(selector){
 
 
@@ -141,19 +142,15 @@ fmBars.setMax = function(maxHeight){
 				return color(d.y);
 			});
 
+		//Get the x values out of the data array and group them for use as the x-axis labels
 		var xLabels = [];
-		console.log("Mapping");
 		for ( var i = 0 ; i < data.length; i++){
 				xLabels.push(data[i].x);
-				console.log(i);
 		}
 
-		console.log(xLabels);
 		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.left + margin.right, w], 0.05), "bottom");
-		// this.renderAxes(xScale, "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.left , w ], 0.05), "bottom");
 		//y-Axis
-		// this.renderAxes(d3.scale.linear().domain([d3.max(data, function(d){return d.y}), 0]).range([ 0, height -margin.top - margin.bottom ]), "left");
 		this.renderAxes(yScale, "left");
 
 		return fmBars;
@@ -161,12 +158,9 @@ fmBars.setMax = function(maxHeight){
 
 	///////////////////////////
 	//Group Bar Chart
+	//////////////////////////
 
 	fmBars.groupedBarChart = function(selector){
-
-		console.log(margin);
-		console.log(data);
-		// console.log(svg);
 
 
 		var layer = svg.selectAll(".layer")
@@ -190,6 +184,7 @@ fmBars.setMax = function(maxHeight){
 				return color(d.y);
 			})
 			.attr("class", ".rect");
+
 
 			//Render xAxis
 	  	// this.renderAxes(d3.scale.ordinal().domain(data, function(d){return d[0].x;}).rangeRoundBands([margin.left ,width - margin.left - margin.right], .08), "bottom");
