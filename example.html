@@ -52,6 +52,9 @@
 	<div id="chart" class="chartArea">
 	</div>
 
+	<div id="pieChart" class="chartArea">
+	</div>
+
 	<div id="grouped" class="chartArea">
 	</div>
 
@@ -101,6 +104,22 @@
 
 
 		chart.barChart();
+
+		///////////////////////////
+		//Pie Chart
+		
+		var pieChart = fmBars,
+			margin = {top: 10, right: 10, bottom: 10, left: 10},
+			dataset = data,
+			w = 900,
+			h = 600;
+
+			pieChart.width(w);
+			pieChart.height(h);
+			pieChart.initialize("#pieChart");
+			pieChart.setData(dataset);
+
+			pieChart.pieChart();
 
 
 		//////////////////////////////////////////
@@ -165,6 +184,10 @@
 		  for (i = 0; i < 5; ++i) bump(a);
 		  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
 		};
+
+
+
+
 	</script>
 
 
