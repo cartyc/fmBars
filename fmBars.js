@@ -209,7 +209,7 @@ fmBars.setMax = function(maxHeight){
 		width = width - margin.left - margin.right;
 		height = height - margin.top - margin.bottom;
 
-		radius = Math.min(width, height ) / 2;
+		radius = Math.min( width, height ) / 2;
 
 		var arc = d3.svg.arc()
 			.outerRadius( radius - 10)
@@ -222,7 +222,7 @@ fmBars.setMax = function(maxHeight){
 			});
 
 			svg.append('g')
-				.attr("transform", "translate(" + width /2 + "," + height / 2 + ")");
+				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 			var g = svg.selectAll(".arc")
 				.data(pie(data))
