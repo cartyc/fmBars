@@ -64,6 +64,10 @@
 	<div id="grouped" class="chartArea">
 	</div>
 
+	<h2 class="title">Scatter Chart</h2>
+	<div id="scatter" class="chartArea">
+	</div>
+
 	<script type="text/javascript">
 
 		//Make a Random dataset
@@ -111,6 +115,27 @@
 
 		chart.barChart();
 
+		data = [
+				["400",10],
+				["10",20],
+				["300",30]
+		]
+
+		//Scatter parseFloat
+		var scatterChart = fmBars,
+			dataset = data,
+			margin = {top: 30, right: 50, bottom: 50, left: 50},
+			w = 900,
+			h = 600;
+
+			scatterChart.width(w);
+			scatterChart.height(h);
+			scatterChart.margin(margin);
+			scatterChart.initialize("#scatter");
+			scatterChart.setData(dataset);
+
+
+			scatterChart.scatter();
 		///////////////////////////
 		//Pie Chart
 
