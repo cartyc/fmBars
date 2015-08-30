@@ -118,7 +118,7 @@ fmBars.setMax = function(maxHeight){
 	//Render the bar chart
 	///////////////////////////
 
-	fmBars.barChart = function(selector){
+	fmBars.barChart = function(){
 
 
 		//let render the bars!
@@ -161,7 +161,7 @@ fmBars.setMax = function(maxHeight){
 	//Group Bar Chart
 	//////////////////////////
 
-	fmBars.groupedBarChart = function(selector){
+	fmBars.groupedBarChart = function(){
 
 
 		var layer = svg.selectAll(".layer")
@@ -204,7 +204,7 @@ fmBars.setMax = function(maxHeight){
 	////							////
 	//////////////////////
 
-	fmBars.pieChart = function(selector){
+	fmBars.pieChart = function(){
 
 		width = width - margin.left - margin.right;
 		height = height - margin.top - margin.bottom;
@@ -254,7 +254,12 @@ fmBars.setMax = function(maxHeight){
 	//////////////////////////////
 	//	Scatter Chart
 	/////////////////////////////
+	fmBars.scatter = function(){
 
+
+
+		return fmBars;
+	}
 
 	////////////////////////////////
 	//
