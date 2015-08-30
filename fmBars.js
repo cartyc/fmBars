@@ -252,8 +252,16 @@ fmBars.setMax = function(maxHeight){
 	}
 
 
+	//////////////////////////////
+	//	Scatter Chart
+	/////////////////////////////
 
-	//Lets make some Axes
+
+	////////////////////////////////
+	//
+	//	Lets make some Axes
+	//
+	////////////////////////////////
 	fmBars.renderAxes = function(scale, orient){
 
 		var axes =  d3.svg.axis()
@@ -274,6 +282,8 @@ fmBars.setMax = function(maxHeight){
 			.call(axes);
 		return fmBars;
 	}
+	////////////////////////////
+
 
   	//make objects callable
     if (typeof define === "function" && define.amd) define(fmBars); else if (typeof module === "object" && module.exports) module.exports = fmBars;
