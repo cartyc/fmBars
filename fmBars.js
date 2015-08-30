@@ -221,7 +221,10 @@ fmBars.setMax = function(maxHeight){
 				return d.y;
 			});
 
-			svg.append('g')
+			var svg = d3.select(selector).append("svg")
+				.attr("width", width)
+				.attr("height", height)
+				.append("g")
 				.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 			var g = svg.selectAll(".arc")
