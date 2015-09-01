@@ -128,10 +128,10 @@
 			dataset = data,
 			w = 900,
 			h = 600,
-			y = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left, w], 0.05),
+			y = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.bottom, h - margin.top - margin.bottom], 0.05),
 			x = d3.scale.linear().domain([0,d3.max(dataset, function(d){
 				return d.y;
-			})]).range([margin.right, h - margin.bottom - margin.top]);
+			})]).range([w - margin.left - margin.right, margin.left ]);
 		;
 
 

@@ -192,10 +192,10 @@ fmBars.setMax = function(maxHeight){
 				xLabels.push(data[i].x);
 		}
 
-		//x-Axis
-		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.left , w ], 0.05), "left");
+		//-Axis
+		this.renderAxes(xScale, "bottom");
 		//y-Axis
-		this.renderAxes(yScale, "bottom");
+		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.top , h - margin.top - margin.bottom ], 0.05), "left");
 
 		return fmBars;
 	};
