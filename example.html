@@ -52,11 +52,11 @@
 		<span class="title">fmBars Examples</span>
 	</div>
 
-	<h2 class="title">Bar Chart</h2>
+	<h2 class="title">Column Chart</h2>
 	<div id="chart" class="chartArea">
 	</div>
 
-	<h2 class="title">Column Chart</h2>
+	<h2 class="title">Bar Chart</h2>
 	<div id="columnChart" class="chartArea">
 	</div>
 
@@ -64,7 +64,7 @@
 	<div id="pieChart" class="chartArea">
 	</div>
 
-	<h2 class="title">Grouped Bar Chart</h2>
+	<h2 class="title">Grouped Column Chart</h2>
 	<div id="grouped" class="chartArea">
 	</div>
 
@@ -93,7 +93,7 @@
 		// });
 
 		///////////////////////////
-		// Bar Chart
+		// Column Chart
 		var chart = fmBars,
 			dataset,
 			margin = {top: 30, right: 50, bottom: 50, left: 50},
@@ -117,11 +117,11 @@
 		chart.yScale(y);
 
 
-		chart.barChart();
+		chart.columns();
 
 
 		///////////////////////////
-		// Column Chart
+		// Bar Chart
 		var columnChart = fmBars,
 			dataset,
 			margin = {top: 30, right: 50, bottom: 50, left: 50},
@@ -145,7 +145,7 @@
 		columnChart.yScale(y);
 
 
-		columnChart.columns();
+		columnChart.barChart();
 
 
 		gdata = [
@@ -243,7 +243,7 @@
 
 		//render it!
 
-		groupedChart.groupedBarChart();
+		groupedChart.groupedColumnChart();
 
 
 		// Inspired by Lee Byron's test data generator.

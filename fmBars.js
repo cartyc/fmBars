@@ -118,7 +118,7 @@ fmBars.setMax = function(maxHeight){
 	//Render the bar chart
 	///////////////////////////
 
-	fmBars.barChart = function(){
+	fmBars.columns = function(){
 
 
 		//let render the bars!
@@ -158,10 +158,10 @@ fmBars.setMax = function(maxHeight){
 	};
 
 	///////////////////////////
-	//Render a Column chart
+	//Render a Bar chart
 	///////////////////////////
 
-	fmBars.columns = function(){
+	fmBars.barChart = function(){
 
 
 		//let render the bars!
@@ -204,7 +204,7 @@ fmBars.setMax = function(maxHeight){
 	//Group Bar Chart
 	//////////////////////////
 
-	fmBars.groupedBarChart = function(){
+	fmBars.groupedColumnChart = function(){
 
 
 		var layer = svg.selectAll(".layer")
