@@ -256,22 +256,28 @@ fmBars.setMax = function(maxHeight){
 	/////////////////////////////
 	fmBars.scatter = function(){
 
-		width = width - margin.left - margin.right;
-		height = height - margin.top - margin.bottom;
+		// width = width - margin.left - margin.right;
+		// height = height - margin.top - margin.bottom;
 
 		svg.selectAll("circle")
 			.data(data)
 			.enter()
 			.append("circle")
 			.attr("cx", function(d){
-				return d[0];
+				return xScale(d[0]);
 			})
 			.attr("cy", function(d){
-				return d[1];
+				return yScale(d[1]);
 			})
 			.attr("r", function(d){
 				return Math.sqrt(height - d[1])
+			})
+			.style("fill", function(d,i){
+				return color(i);
 			});
+
+			this.renderAxes(xScale, "bottom");
+			this.renderAxes(yScale, "left");
 
 		return fmBars;
 	}

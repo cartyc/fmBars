@@ -115,10 +115,13 @@
 
 		chart.barChart();
 
-		data = [
+		gdata = [
 				["400",10],
 				["10",20],
-				["300",30]
+				["300",30],
+				["300",10],
+				["200",30],
+				["600",60],
 		]
 
 		//////////////////////
@@ -126,16 +129,24 @@
 		/////////////////////
 
 		var scatterChart = fmBars,
-			dataset = data,
+			dataset = gdata,
 			margin = {top: 30, right: 50, bottom: 50, left: 50},
 			w = 900,
-			h = 600;
+			h = 600,
+			x = d3.scale.linear().domain([0, d3.max(dataset, function(d){
+				return d[0];
+			})]).range([margin.left, w - margin.right - margin.left]),
+			y = d3.scale.linear().domain([d3.max(dataset, function(d){
+				return d[1];
+			}), 0]).range([margin.bottom, h - margin.top - margin.bottom ]);
 
 			scatterChart.width(w);
 			scatterChart.height(h);
 			scatterChart.margin(margin);
 			scatterChart.initialize("#scatter");
 			scatterChart.setData(dataset);
+			scatterChart.xScale(x);
+			scatterChart.yScale(y);
 
 
 			scatterChart.scatter();
