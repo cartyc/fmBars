@@ -170,6 +170,7 @@ fmBars.setMax = function(maxHeight){
 			.enter()
 			.append("rect")
 			.attr("x", function(d){
+				// return xScale(d.y);
 				return xScale(d.y);
 			})
 			.attr("y", function(d,i){
@@ -177,7 +178,7 @@ fmBars.setMax = function(maxHeight){
 				return yScale(i);
 			})
 			.attr("width", function(d){
-				return (width -margin.right - margin.left) - xScale(d.y);
+				return (width - margin.right - margin.left) - xScale(d.y);
 			})
 			.attr("height", function(d){
 				return yScale.rangeBand();
