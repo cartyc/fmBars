@@ -158,6 +158,49 @@ fmBars.setMax = function(maxHeight){
 	};
 
 	///////////////////////////
+	//Render a Column chart
+	///////////////////////////
+
+	fmBars.columns = function(){
+
+
+		//let render the bars!
+		svg.selectAll("rect")
+			.data(data)
+			.enter()
+			.append("rect")
+			.attr("x", function(d){
+				return xScale(d.y);
+			})
+			.attr("y", function(d,i){
+				// console.log(d.y);
+				return yScale(i);
+			})
+			.attr("width", function(d){
+				return (width -margin.right - margin.left) - xScale(d.y);
+			})
+			.attr("height", function(d){
+				return yScale.rangeBand();
+			})
+			.attr("fill", function(d){
+				return color(d.y);
+			});
+
+		//Get the x values out of the data array and group them for use as the x-axis labels
+		var xLabels = [];
+		for ( var i = 0 ; i < data.length; i++){
+				xLabels.push(data[i].x);
+		}
+
+		//x-Axis
+		this.renderAxes(d3.scale.ordinal().domain(xLabels).rangeRoundBands([margin.left , w ], 0.05), "left");
+		//y-Axis
+		this.renderAxes(yScale, "bottom");
+
+		return fmBars;
+	};
+
+	///////////////////////////
 	//Group Bar Chart
 	//////////////////////////
 

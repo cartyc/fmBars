@@ -56,6 +56,10 @@
 	<div id="chart" class="chartArea">
 	</div>
 
+	<h2 class="title">Column Chart</h2>
+	<div id="columnChart" class="chartArea">
+	</div>
+
 	<h2 class="title">Pie Chart</h2>
 	<div id="pieChart" class="chartArea">
 	</div>
@@ -88,7 +92,7 @@
 		// 	return [i, Math.floor(Math.random() * 50) + 1];
 		// });
 
-
+		///////////////////////////
 		// Bar Chart
 		var chart = fmBars,
 			dataset,
@@ -114,6 +118,35 @@
 
 
 		chart.barChart();
+
+
+		///////////////////////////
+		// Column Chart
+		var columnChart = fmBars,
+			dataset,
+			margin = {top: 30, right: 50, bottom: 50, left: 50},
+			dataset = data,
+			w = 900,
+			h = 600,
+			y = d3.scale.ordinal().domain(d3.range(dataset.length)).rangeRoundBands([margin.left, w], 0.05),
+			x = d3.scale.linear().domain([0,d3.max(dataset, function(d){
+				return d.y;
+			})]).range([margin.right, h - margin.bottom - margin.top]);
+		;
+
+
+		//set the data to the chart
+		columnChart.width(w);
+		columnChart.height(h);
+		columnChart.margin(margin);
+		columnChart.initialize("#columnChart");
+		columnChart.setData(dataset);
+		columnChart.xScale(x);
+		columnChart.yScale(y);
+
+
+		columnChart.columns();
+
 
 		gdata = [
 				["400",10],
