@@ -140,13 +140,14 @@ fmBars.setMax = function(maxHeight){
 				return xScale.rangeBand();
 			})
 			.attr("fill", function(d){
-				return color(d.y);
+
+					return color(d.x);
 			});
 
 		//Get the x values out of the data array and group them for use as the x-axis labels
 		var xLabels = [];
 		for ( var i = 0 ; i < data.length; i++){
-				xLabels.push(data[i].x);
+				xLabels.push(data[i].y);
 		}
 
 		//x-Axis
